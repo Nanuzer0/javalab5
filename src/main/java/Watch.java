@@ -29,18 +29,29 @@ public class Watch implements  WatchType{
         Hour = Time/60;
         minute = Time%60;
     }
+    public Watch(int Time, String brand, double price){
+        Hour = Time/60;
+        minute = Time%60;
+        Brand = brand;
+        this.price = price;
+    }
 
     @Override
     public String toString(){return this.Hour+":"+this.minute+" "+this.Brand+ " "+this.price;}
+
+    @Override
+    public String getTime() {
+        return this.Hour+":"+this.minute;
+    }
 
     @Override
     public void SetTime(int[] data) throws Exception{
         int hour = data[0];
         int minute = data[1];
         if(0<=hour && hour<=23) Hour = hour;
-       else throw new Exception("Incorrect amount");
-       if(0<=minute && minute<=60) this.minute = minute;
-       else throw new Exception("Incorrect amount");
+        else throw new Exception("Incorrect amount");
+        if(0<=minute && minute<=60) this.minute = minute;
+        else throw new Exception("Incorrect amount");
     }
 
     @Override
@@ -49,7 +60,8 @@ public class Watch implements  WatchType{
         int minutes = data[1];
         this.Hour = this.Hour+hours%24;
         this.minute = this.minute+minutes%60;
-        if (this.minute==60) {this.Hour++; this.minute=0;}
+        if (this.minute>=60) {this.Hour++; this.minute%=60;}
+        if (this.Hour==24) this.Hour=0;
     }
 
 

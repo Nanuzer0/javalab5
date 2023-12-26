@@ -4,10 +4,10 @@ public class WatchFactory {
 
         switch (type){
             case HourMinute:
-                watch = new Watch(time);
+                watch = new Watch(time,brand,price);
                 break;
             case HourMinuteSecond:
-                watch = new Watch2(time);
+                watch = new Watch2(time,brand,price);
                 break;
         }
         return watch;
